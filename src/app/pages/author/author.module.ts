@@ -7,10 +7,12 @@ import { AddAuthorComponent } from './add-author/add-author.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
-const materialImports = [
+const materialModules = [
   MatInputModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatIconModule,
 ]
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ const materialImports = [
     CommonModule,
     AuthorRoutingModule,
     ReactiveFormsModule,
-    ...materialImports
+    ...materialModules
   ]
 })
 export class AuthorModule { }
