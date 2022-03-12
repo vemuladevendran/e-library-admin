@@ -1,0 +1,122 @@
+<div class="container-fluid main-container h-100 p-md-5">
+    <form class="row" [formGroup]="createBookForm">
+        <!-- title details -->
+        <div class="col-12 d-flex justify-content-between">
+            <h1>Add Book</h1>
+            <p><a routerLink="/books">Books</a> / Add-Book</p>
+        </div>
+        <!-- add book -->
+        <div class="col-12 col-md-6 mt-md-5">
+            <mat-card class="h-100">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Book Title</mat-label>
+                                <input matInput formControlName="title" />
+                            </mat-form-field>
+                        </div>
+                        <!-- category selection -->
+                        <div>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Book Category</mat-label>
+                                <mat-select formControlName="category">
+                                    <mat-option class="text-uppercase" value="abc">
+                                        abc
+                                    </mat-option>
+                                    <mat-option class="text-uppercase" value="gjknhj">
+                                        gjknhj
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- author selection -->
+                        <div>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Author Name</mat-label>
+                                <mat-select formControlName="authorName">
+                                    <mat-option [value]="author" *ngFor="let author of authors">
+                                        {{author}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- for adding new author link -->
+                        <div class="text-md-end">
+                            To add new Author <a routerLink="/author/add-author">Click Here</a>
+                        </div>
+                        <!-- books avalible -->
+                        <div>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>No of books avalible</mat-label>
+                                <input matInput formControlName="totalCount" type="number" min="1" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-4 mt-md-0 d-flex justify-content-center border-start border-danger">
+                        <div class="position-relative cursor-pointer">
+                            <img src="/assets/book-2.webp" alt="Upload book image" class="w-100 book-img">
+                            <p class="upload-title text-center text-danger h5">Upload Book Image</p>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-12 col-md-6 mt-3 mt-md-5">
+            <mat-card class="h-100">
+                <div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Book Code</mat-label>
+                        <input matInput formControlName="code" />
+                    </mat-form-field>
+                </div>
+                <!-- preferred  year-->
+                <div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Preferred Year</mat-label>
+                        <mat-select formControlName="preferredYear">
+                            <mat-option class="text-uppercase" value="firstYear">
+                                First Year
+                            </mat-option>
+                            <mat-option class="text-uppercase" value="secondYear">
+                                Second Year
+                            </mat-option>
+                            <mat-option class="text-uppercase" value="thirdYear">
+                                Third Year
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- published Year date picking -->
+                <div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Published Year</mat-label>
+                        <input matInput [matDatepicker]="dp" formControlName="publishedYear">
+                        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                        <mat-datepicker #dp startView="multi-year" panelClass="example-month-picker">>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Publisher Name</mat-label>
+                        <input matInput formControlName="publisher" />
+                    </mat-form-field>
+                </div>
+                <div class="d-flex flex-wrap justify-content-center mt-2">
+                    <div>
+                        <a [routerLink]="['/books']" class="btn bg-danger text-white btn-sm me-3 rounded shadow">
+                            <span class="h6">&#10006; </span>
+                            Cancel
+                        </a>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm rounded shadow" [disabled]="createBookForm.invalid">
+                            Add Book
+                        </button>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </form>
+</div>
