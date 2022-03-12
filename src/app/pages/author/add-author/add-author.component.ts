@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-author',
@@ -6,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-author.component.scss']
 })
 export class AddAuthorComponent implements OnInit {
-
-  constructor() { }
+  authorForm: FormGroup
+  constructor(
+    private fb: FormBuilder,
+  ) {
+    this.authorForm = this.fb.group({
+      authorName: ['', [Validators.required]],
+      authorEmail: ['', [Validators.required]],
+    })
+  }
 
   ngOnInit(): void {
   }
