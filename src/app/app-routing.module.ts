@@ -23,7 +23,9 @@ const routes: Routes = [
   {
     path: '',
     component: AppShellComponent,
-    children: [],
+    children: [
+      { path: 'author', loadChildren: () => import('./pages/author/author.module').then(m => m.AuthorModule) },
+    ],
   },
 ];
 

@@ -10,7 +10,7 @@ import { menuItems as menuList } from './sidenav-items';
 @Component({
   selector: 'app-app-shell',
   templateUrl: './app-shell.component.html',
-  styleUrls: ['./app-shell.component.css']
+  styleUrls: ['./app-shell.component.scss']
 })
 export class AppShellComponent implements OnInit, OnDestroy {
   
