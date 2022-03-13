@@ -17,5 +17,20 @@ a {
   cursor: pointer;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.btn-secondary {
+  background-color: #dc3546 !important;
+  border-color: #dc3546 !important;
+}
+
+.bg-secondary {
+  background-color: #dc3546 !important;
+}
+
+.text-secondary {
+  color: #dc3546 !important;
+}
+
+
+.zero-padding-panel mat-dialog-container {
+  padding: 0 !important;
+}

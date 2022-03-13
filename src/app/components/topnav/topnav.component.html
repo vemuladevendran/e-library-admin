@@ -1,13 +1,17 @@
 <mat-toolbar class="d-flex justify-content-between mat-elevation-z2">
     <div class="d-flex">
         <button mat-icon-button (click)="toggleSideNav()">
-            <mat-icon>menu</mat-icon>
+            <mat-icon>menu_open</mat-icon>
         </button>
 
         <!-- Titles Will change dynamically based on the page -->
         <h1 class="mat-h3">{{title}}</h1>
     </div>
-    <div>
+    <div class="d-flex align-items-center">
+        <!-- live time -->
+        <span class="fs-6">
+            {{timeDate | date:'MM/dd/yyyy h:mm:ss'}}
+        </span>
         <button mat-icon-button aria-label="Account">
             <mat-icon>notifications</mat-icon>
         </button>

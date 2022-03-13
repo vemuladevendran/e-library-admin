@@ -12,6 +12,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BookCardComponent } from './book-card/book-card.component';
+import { ViewBookComponent } from './view-book/view-book.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const materialModules = [
   MatInputModule,
@@ -21,11 +24,14 @@ const materialModules = [
   MatSelectModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatDialogModule
 ]
 @NgModule({
   declarations: [
     BooksComponent,
-    AddBookComponent
+    AddBookComponent,
+    BookCardComponent,
+    ViewBookComponent
   ],
   imports: [
     CommonModule,

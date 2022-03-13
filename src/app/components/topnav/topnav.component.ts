@@ -10,10 +10,15 @@ export class TopnavComponent implements OnInit {
   isLoggedIn = true;
   @Input() snav: any;
   title = '';
+  timeDate = new Date();
 
   constructor(
     private auth: AuthService,
-  ) { }
+  ) {
+    setInterval(() => {
+      this.timeDate = new Date();
+    }, 1);
+  }
 
   ngOnInit(): void {
   }
