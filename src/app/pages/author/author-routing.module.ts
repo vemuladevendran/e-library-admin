@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'add-author',
     component: AddAuthorComponent,
+  },
+  {
+    path: 'edit-author/:id',
+    component: AddAuthorComponent,
   }
 ];
 

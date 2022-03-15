@@ -35,8 +35,8 @@
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Author Name</mat-label>
                                 <mat-select formControlName="authorName">
-                                    <mat-option [value]="author" *ngFor="let author of authors">
-                                        {{author}}
+                                    <mat-option [value]="author.authorName" *ngFor="let author of authors">
+                                        {{author.authorName}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -87,7 +87,7 @@
                 <div>
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Preferred Year</mat-label>
-                        <mat-select formControlName="preferredYear">
+                        <mat-select formControlName="preferredYear" multiple>
                             <mat-option class="text-uppercase" value="firstYear">
                                 First Year
                             </mat-option>

@@ -19,10 +19,22 @@ export class AuthorService {
     return lastValueFrom(this.http.get(url));
   }
 
+  // get author by id
+  getAuthorById(id: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/author/${id}`;
+    return lastValueFrom(this.http.get(url));
+  }
+
   // create new author
   createAuthor(data: any): Promise<any> {
     const url = `${this.settings.API_BASE_URL}/author`;
     return lastValueFrom(this.http.post(url, data))
+  }
+
+  // update new author
+  updateAuthor(data: any, id: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/author/${id}`;
+    return lastValueFrom(this.http.put(url, data))
   }
 
   // delete author

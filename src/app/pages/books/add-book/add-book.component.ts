@@ -2,6 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthorService } from 'src/app/services/author/author.service';
+import { BookService } from 'src/app/services/book/book.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-add-book',
@@ -12,15 +17,23 @@ export class AddBookComponent implements OnInit {
   @ViewChild('bookImage') fileInput: ElementRef<HTMLInputElement> | undefined;
   selectedImagePreviewURL: any = "";
   selectedFile: any;
-  authors = ['deva', 'hari', 'charan'];
+  authors: any[] = [];
   createBookForm: FormGroup;
+  formData = new FormData();
+  bookId = '';
 
   constructor(
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
+    private authorServe: AuthorService,
+    private bookServe: BookService,
+    private toast: ToastrService,
+    private loader: LoaderService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.createBookForm = this.fb.group({
-      image: [null],
+      image: null,
       title: ['', [Validators.required]],
       category: ['', [Validators.required]],
       authorName: ['', [Validators.required]],
@@ -30,9 +43,11 @@ export class AddBookComponent implements OnInit {
       publisher: ['', [Validators.required]],
       totalCount: ['', [Validators.required]],
     })
+    this.bookId = this.route.snapshot.paramMap.get('id') ?? '';
   }
 
   ngOnInit(): void {
+    this.authorList();
   }
 
   // image change handle
@@ -43,18 +58,79 @@ export class AddBookComponent implements OnInit {
       this.selectedImagePreviewURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
     }
   }
-  
+
   // open file input
   openFileSelectionDialog(): void {
     this.fileInput?.nativeElement?.click();
   }
 
+  // get author list
+  async authorList(): Promise<void> {
+    try {
+      this.authors = await this.authorServe.getAuthors();
+    } catch (error) {
+      console.log(error);
+      this.toast.error('Fail to fetch authors')
+    }
+  }
+
   // on submiting the form
   async createBook(): Promise<void> {
     try {
-      console.log(this.createBookForm.value);
-    } catch (error) {
+      // checking image file
+      if (this.selectedFile !== undefined) {
+        this.updateFormData();
+        this.loader.show();
+
+        // checking update form or add form
+        if (this.bookId !== '') {
+          await this.bookServe.updateBook(this.bookId, this.formData);
+          this.toast.success('Updated');
+          this.router.navigate(['/books'])
+          return;
+        }
+        await this.bookServe.createBook(this.formData);
+        this.toast.success('Created');
+        this.router.navigate(['/books'])
+        return;
+      };
+      this.loader.show();
+
+      // checking update form or add form
+      if (this.bookId !== '') {
+        if (this.selectedImagePreviewURL === '') {
+          this.createBookForm.value.photo = null;
+        }
+        await this.bookServe.updateBook(this.bookId, this.createBookForm.value);
+        this.toast.success('Updated');
+        this.router.navigate(['/books'])
+        return;
+      }
+      await this.bookServe.createBook(this.createBookForm.value);
+      this.toast.success('Created');
+      this.router.navigate(['/books'])
+      return;
+    } catch (error: any) {
+      this.toast.error(error?.message)
       console.log(error);
+    }finally{
+      this.loader.hide();
     }
+  }
+
+  // update form data
+
+  updateFormData(): void {
+    const formValues = this.createBookForm.value;
+    Object.entries(formValues).forEach(([key, value]: any) => {
+      if (Array.isArray(value)) {
+        value.forEach(v => {
+          this.formData.append(key, v);
+        })
+      } else {
+        this.formData.append(key, value);
+      }
+    })
+    this.formData.append('image', this.selectedFile);
   }
 }

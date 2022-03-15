@@ -11,8 +11,12 @@
                 </button>
             </div>
         </div>
+        <!-- empty list -->
+        <div class="col-12 text-center" *ngIf="authorList.length === 0">
+            <img src="/assets/no-data-found.png" class="w-100" alt="NO DATA FOUND">
+        </div>
         <!-- author details -->
-        <div class="col-12 table-responsive mt-3">
+        <div class="col-12 table-responsive mt-3" *ngIf="authorList.length !== 0">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -23,16 +27,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let l of [0,0,0,0,0,0,0,0]; index as i">
+                    <tr *ngFor="let author of authorList; index as i">
                         <th scope="row" class="text-center">{{i+1}}</th>
-                        <td class="text-center">{{'Author'}}</td>
-                        <td class="text-center">{{'Email'}}</td>
+                        <td class="text-center">{{author.authorName}}</td>
+                        <td class="text-center">{{author.authorEmail}}</td>
                         <td class="text-center">
                             <mat-icon aria-hidden="false" aria-label="Edit" matTooltip="Edit"
-                                class="text-primary mx-2 cursor-pointer">edit</mat-icon>
+                                class="text-primary mx-2 cursor-pointer" [routerLink]="['edit-author/',author.id]">edit
+                            </mat-icon>
 
                             <mat-icon aria-hidden="false" aria-label="Edit" matTooltip="Delete"
-                                class="text-danger cursor-pointer">delete</mat-icon>
+                                class="text-danger cursor-pointer" (click)="deleteAuthor(author.id)">delete</mat-icon>
                         </td>
                     </tr>
                 </tbody>
