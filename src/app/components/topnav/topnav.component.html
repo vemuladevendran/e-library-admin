@@ -12,10 +12,6 @@
         <span class="fs-6">
             {{timeDate | date:'MM/dd/yyyy h:mm:ss'}}
         </span>
-        <button mat-icon-button aria-label="Account">
-            <mat-icon>notifications</mat-icon>
-        </button>
-
         <!-- Account Dropdown Menu : starts-->
         <button mat-button [matMenuTriggerFor]="menu" aria-label="Account" *ngIf="isLoggedIn">
             <mat-icon>account_circle</mat-icon>
