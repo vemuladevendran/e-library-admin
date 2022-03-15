@@ -44,4 +44,10 @@ export class BookService {
     const url = `${this.settings.API_BASE_URL}/book/${id}`;
     return lastValueFrom(this.http.delete(url));
   }
+
+  // get books category
+  getBooksCategory(): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/book/category`;
+    return lastValueFrom(this.http.get(url));
+  }
 }

@@ -18,6 +18,7 @@ export class AddBookComponent implements OnInit {
   selectedImagePreviewURL: any = "";
   selectedFile: any;
   authors: any[] = [];
+  booksCategory: any[] = [];
   createBookForm: FormGroup;
   formData = new FormData();
   bookId = '';
@@ -48,6 +49,7 @@ export class AddBookComponent implements OnInit {
 
   ngOnInit(): void {
     this.authorList();
+    this.getBooksCategory();
   }
 
   // image change handle
@@ -71,6 +73,15 @@ export class AddBookComponent implements OnInit {
     } catch (error) {
       console.log(error);
       this.toast.error('Fail to fetch authors')
+    }
+  }
+  // get books category
+  async getBooksCategory(): Promise<void> {
+    try {
+      this.booksCategory = await this.bookServe.getBooksCategory();
+    } catch (error) {
+      console.log(error);
+      this.toast.error('Fail to fetch Books Category')
     }
   }
 
@@ -113,7 +124,7 @@ export class AddBookComponent implements OnInit {
     } catch (error: any) {
       this.toast.error(error?.message)
       console.log(error);
-    }finally{
+    } finally {
       this.loader.hide();
     }
   }
