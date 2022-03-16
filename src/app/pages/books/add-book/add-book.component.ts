@@ -76,8 +76,7 @@ export class AddBookComponent implements OnInit {
       }
       this.loader.show();
       const data = await this.bookServe.getBookById(this.bookId);
-      console.log(data.image)
-      if (data.image !== null) {
+      if (data.image !== null && data.image !== undefined) {
         this.selectedImagePreviewURL = data?.image.url;
       }
       this.createBookForm.patchValue(data);
@@ -118,7 +117,6 @@ export class AddBookComponent implements OnInit {
 
         // checking update form or add form
         if (this.bookId !== '') {
-          console.log(this.formData);
           await this.bookServe.updateBook(this.bookId, this.formData);
           this.toast.success('Updated');
           this.router.navigate(['/books'])
@@ -146,7 +144,7 @@ export class AddBookComponent implements OnInit {
       this.router.navigate(['/books'])
       return;
     } catch (error: any) {
-      this.toast.error(error?.message)
+      this.toast.error(error?.error?.message)
       console.log(error);
     } finally {
       this.loader.hide();

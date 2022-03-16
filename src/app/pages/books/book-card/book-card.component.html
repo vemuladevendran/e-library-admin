@@ -13,13 +13,14 @@
                 <p class="fw-bold">Avalible : <span class="text-secondary"> {{book.totalCount}} books</span> </p>
             </div>
             <!-- action btn -->
-            <div class="w-100 row">
-                <div class="col-6 text-center">
+            
+            <div class="w-100 row border-top">
+                <div class="col-6 text-center mt-2">
                     <button class="btn btn-primary btn-sm rounded shadow" (click)="editBookDetails(book._id)">
                         Update <span class="d-none d-xl-inline">Book</span>
                     </button>
                 </div>
-                <div class="col-6 text-center">
+                <div class="col-6 text-center mt-2">
                     <button class="btn btn-danger btn-sm rounded shadow" (click)="deleteBook(book._id, $event)">
                         Delete <span class="d-none d-xl-inline">Book</span>
                     </button>

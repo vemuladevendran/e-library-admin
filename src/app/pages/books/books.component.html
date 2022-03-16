@@ -11,33 +11,47 @@
         </div>
         <!-- filters -->
         <div class="col-12">
-            <form class="row">
+            <form class="row" [formGroup]="filtersForm">
                 <div class="col-lg-3 col-md-4">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Author</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="author">
                             <mat-option value="">All </mat-option>
+                            <mat-option [value]="a._id" *ngFor="let a of authors">{{a.authorName}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option value="">All </mat-option>
+                            <mat-option [value]="c" *ngFor="let c of booksCategory">{{c}} </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="col-lg-3 col-md-4">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Title</mat-label>
-                        <input matInput placeholder="Title" type="text" />
+                        <input matInput placeholder="Title" type="text" formControlName="title" />
                     </mat-form-field>
                 </div>
                 <div class="col-lg-3 col-md-4">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Code</mat-label>
-                        <input type="text" matInput placeholder="Code" />
+                        <input type="text" matInput placeholder="Code" formControlName="code" />
                     </mat-form-field>
                 </div>
             </form>
         </div>
     </section>
     <hr>
+    <!-- empty list -->
+    <div class="col-12 text-center" *ngIf="bookList.length === 0">
+        <img src="/assets/no-data-found.png" class="w-100" alt="NO DATA FOUND">
+    </div>
     <!-- book preview cards -->
-    <section>
+    <section *ngIf="bookList.length !== 0">
         <app-book-card [bookList]="bookList" (deleteBookId)="deleteBook($event)"></app-book-card>
     </section>
 </div>
