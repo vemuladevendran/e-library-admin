@@ -32,8 +32,8 @@
                         <div>
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Author Name</mat-label>
-                                <mat-select formControlName="authorName">
-                                    <mat-option [value]="author.authorName" *ngFor="let author of authors">
+                                <mat-select formControlName="author">
+                                    <mat-option [value]="author._id" *ngFor="let author of authors">
                                         {{author.authorName}}
                                     </mat-option>
                                 </mat-select>

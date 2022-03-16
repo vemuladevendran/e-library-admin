@@ -37,7 +37,7 @@ export class AddBookComponent implements OnInit {
       image: null,
       title: ['', [Validators.required]],
       category: ['', [Validators.required]],
-      authorName: ['', [Validators.required]],
+      author: ['', [Validators.required]],
       code: ['', [Validators.required]],
       preferredYear: ['', [Validators.required]],
       publishedYear: ['', [Validators.required]],
