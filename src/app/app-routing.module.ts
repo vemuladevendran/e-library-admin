@@ -24,18 +24,31 @@ const routes: Routes = [
     path: '',
     component: AppShellComponent,
     children: [
-      { path: 'authors', loadChildren: () => import('./pages/author/author.module').then(m => m.AuthorModule) },
-      { path: 'books', loadChildren: () => import('./pages/books/books.module').then(m => m.BooksModule) },
+      {
+        path: 'authors',
+        loadChildren: () =>
+          import('./pages/author/author.module').then((m) => m.AuthorModule),
+      },
+      {
+        path: 'books',
+        loadChildren: () =>
+          import('./pages/books/books.module').then((m) => m.BooksModule),
+      },
+      {
+        path: 'student',
+        loadChildren: () =>
+          import('./pages/student/student.module').then((m) => m.StudentModule),
+      },
     ],
   },
   {
     path: '**',
-    redirectTo: '/authors'
-  }
+    redirectTo: '/authors',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
