@@ -1,8 +1,10 @@
 <div class="h-100 container-fluid">
   <div class="row">
     <div class="col-12 d-flex justify-content-between align-items-center">
-      <div><h1>Create Student</h1></div>
-      <div><a routerLink="student">student</a>/add-student</div>
+      <div>
+        <h1>Create Student</h1>
+      </div>
+      <div><a routerLink="/student">student</a> / add-student</div>
     </div>
     <form class="col-12" [formGroup]="createStudentForm">
       <mat-card class="h-100">
@@ -47,11 +49,7 @@
             <mat-label>DOB</mat-label>
             <input matInput [matDatepicker]="dp" formControlName="dob" />
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker
-              #dp
-              startView="multi-year"
-              panelClass="example-month-picker"
-            >
+            <mat-datepicker #dp startView="multi-year" panelClass="example-month-picker">
             </mat-datepicker>
           </mat-form-field>
         </div>
