@@ -38,6 +38,6 @@
     <hr>
     <!-- book preview cards -->
     <section>
-        <app-book-card [bookList]="bookList"></app-book-card>
+        <app-book-card [bookList]="bookList" (deleteBookId)="deleteBook($event)"></app-book-card>
     </section>
 </div>

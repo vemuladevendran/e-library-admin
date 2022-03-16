@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'add-book',
     component: AddBookComponent
+  },
+  {
+    path: 'edit-book/:id',
+    component: AddBookComponent
   }
 ];
 

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ViewBookComponent } from '../view-book/view-book.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-card',
@@ -9,16 +10,24 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 })
 export class BookCardComponent implements OnInit {
   @Input() bookList: any[] = [];
+  @Output() deleteBookId = new EventEmitter<string>();
+
   constructor(
     private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
+  // edit book details
+  editBookDetails(id: string): void {
+    this.router.navigate([`books/edit-book/${id}`])
+  }
 
   // opening view dialog
-  openDialog(data: any) {
+  openDialog(e: any, data: any) {
+    e.stopPropagation();
     const dialogRef = this.dialog.open(ViewBookComponent, {
       width: '500px',
       height: '350px',
@@ -27,6 +36,15 @@ export class BookCardComponent implements OnInit {
         data
       }
     });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  // Emit the book id to delete the book
+  deleteBook(id: string, event: any) {
+    event.stopPropagation();
+    this.deleteBookId.emit(id);
   }
 
 }

@@ -22,6 +22,7 @@ export class AddBookComponent implements OnInit {
   createBookForm: FormGroup;
   formData = new FormData();
   bookId = '';
+  defaultImageUrl="/assets/book-2.webp";
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +49,7 @@ export class AddBookComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getEditFormValues();
     this.authorList();
     this.getBooksCategory();
   }
@@ -64,6 +66,27 @@ export class AddBookComponent implements OnInit {
   // open file input
   openFileSelectionDialog(): void {
     this.fileInput?.nativeElement?.click();
+  }
+
+  // get edit form values
+  async getEditFormValues(): Promise<void> {
+    try {
+      if (this.bookId === '') {
+        return;
+      }
+      this.loader.show();
+      const data = await this.bookServe.getBookById(this.bookId);
+      console.log(data.image)
+      if (data.image !== null) {
+        this.selectedImagePreviewURL = data?.image.url;
+      }
+      this.createBookForm.patchValue(data);
+    } catch (error) {
+      console.log(error);
+      this.toast.error('fail to get details')
+    } finally {
+      this.loader.hide();
+    }
   }
 
   // get author list
@@ -95,6 +118,7 @@ export class AddBookComponent implements OnInit {
 
         // checking update form or add form
         if (this.bookId !== '') {
+          console.log(this.formData);
           await this.bookServe.updateBook(this.bookId, this.formData);
           this.toast.success('Updated');
           this.router.navigate(['/books'])
@@ -110,7 +134,7 @@ export class AddBookComponent implements OnInit {
       // checking update form or add form
       if (this.bookId !== '') {
         if (this.selectedImagePreviewURL === '') {
-          this.createBookForm.value.photo = null;
+          this.createBookForm.value.image = null;
         }
         await this.bookServe.updateBook(this.bookId, this.createBookForm.value);
         this.toast.success('Updated');

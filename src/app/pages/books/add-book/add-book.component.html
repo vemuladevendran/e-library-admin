@@ -2,7 +2,7 @@
     <form class="row" [formGroup]="createBookForm" (ngSubmit)="createBook()">
         <!-- title details -->
         <div class="col-12 d-flex justify-content-between">
-            <h1>Add Book</h1>
+            <h1> {{bookId === "" ? 'Add Book' : 'Update Book'}}</h1>
             <p><a routerLink="/books">Books</a> / Add-Book</p>
         </div>
         <!-- add book -->
@@ -53,8 +53,8 @@
                     </div>
                     <div class="col-12 col-lg-6 mt-4 mt-md-0 d-flex justify-content-center border-start border-danger">
                         <div class="position-relative cursor-pointer" *ngIf="selectedImagePreviewURL === ''">
-                            <img src="/assets/book-2.webp" alt="Upload book image" class="w-100 book-img"
-                                (click)="openFileSelectionDialog()">
+                            <img [src]="selectedImagePreviewURL === '' ? '/assets/book-2.webp' : selectedImagePreviewURL "
+                                alt="Upload book image" class="w-100 book-img" (click)="openFileSelectionDialog()">
                             <p class="upload-title text-center text-danger h5">Upload Book Image</p>
                         </div>
                         <!-- after selected book image -->
@@ -123,7 +123,7 @@
                     </div>
                     <div>
                         <button class="btn btn-primary btn-sm rounded shadow" [disabled]="createBookForm.invalid">
-                            Add Book
+                            {{bookId === "" ? 'Add Book' : 'Update Book'}}
                         </button>
                     </div>
                 </div>
