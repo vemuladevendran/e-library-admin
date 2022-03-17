@@ -1,55 +1,36 @@
-<section
-  class="container-fluid d-flex align-items-center justify-content-center"
->
-  <div class="d-flex flex-wrap">
-    <div class="me-5 d-none d-md-flex">
-      <img src="/assets/login.svg" alt="auth" height="300" />
-    </div>
-    <form
-      class="d-flex flex-column justify-content-center"
-      [formGroup]="loginForm"
-    >
-      <h2 class="fw-bold">LOGIN</h2>
-      <div>
-        <mat-form-field appearance="fill" class="w-100">
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            placeholder="Email"
-            type="email"
-            formControlName="email"
-          />
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
+<div class="container h-100">
+  <div class="row h-100 align-items-center justify-content-center">
+    <!-- image content -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <h1 class="text-center fw-bold login-title">Login your account</h1>
+      <div class="login-form-wrapper" style="margin-top: 5rem;">
+        <form [formGroup]="loginForm">
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input type="email" email matInput formControlName="email" />
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="passwordHide ? 'password' : 'text'" formControlName="password">
+              <button type="button" mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide" class="border-0">
+                <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <!-- login btn -->
+          <div>
 
-          <input
-            matInput
-            [type]="hide ? 'password' : 'text'"
-            required
-            formControlName="password"
-          />
-          <button
-            mat-icon-button
-            matSuffix
-            (click)="hide = !hide"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide"
-            class="border-0 bg-white"
-            type="button"
-          >
-            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-          </button>
-        </mat-form-field>
+          </div>
+        </form>
       </div>
-      <a
-        routerLink="/forgot-password"
-        class="text-end text-muted text-decoration-underline mb-3"
-        >Forgot Password?</a
-      >
-      <button class="w-100 btn btn-primary btn-sm">Login</button>
-    </form>
+    </div>
+    <!-- login form -->
+    <div class="col-12 col-md-6 d-none d-md-block">
+      <img src="/assets/login-img.webp" alt="Login image" class="w-100 h-100">
+    </div>
   </div>
-</section>
+</div>
