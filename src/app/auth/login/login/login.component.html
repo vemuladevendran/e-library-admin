@@ -1,10 +1,14 @@
 <div class="container h-100">
   <div class="row h-100 align-items-center justify-content-center">
-    <!-- image content -->
+    <!-- image  container -->
+    <div class="col-12 col-md-6">
+      <img src="/assets/login-img.webp" alt="Login image" class="w-100 h-100">
+    </div>
+    <!-- login form -->
     <div class="col-12 col-md-6 col-lg-4">
       <h1 class="text-center fw-bold login-title">Login your account</h1>
-      <div class="login-form-wrapper" style="margin-top: 5rem;">
-        <form [formGroup]="loginForm">
+      <div class="login-form-wrapper" style="margin-top: 4rem;">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
           <div>
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Email</mat-label>
@@ -21,16 +25,18 @@
               </button>
             </mat-form-field>
           </div>
+          <!-- invalid details -->
+          <p class="text-danger" *ngIf="invalidDetails !== ''">
+            {{invalidDetails}}
+          </p>
           <!-- login btn -->
-          <div>
-
+          <div class="text-center">
+            <button class="login-btn border-0 px-5 py-2 rounded text-white fw-bold" [disabled]="loginForm.invalid">
+              Login
+            </button>
           </div>
         </form>
       </div>
-    </div>
-    <!-- login form -->
-    <div class="col-12 col-md-6 d-none d-md-block">
-      <img src="/assets/login-img.webp" alt="Login image" class="w-100 h-100">
     </div>
   </div>
 </div>
