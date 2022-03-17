@@ -30,7 +30,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
           // Checking if it is an Authentication Error (401)
           if (error.status === 401) {
-            this.auth.logout();
+            // this.auth.logout();
           }
 
           // Checking if user cannot access this resource

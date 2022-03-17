@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Toast } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
@@ -15,19 +16,24 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loader: LoaderService,
+    private authServe: AuthService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
     });
   }
 
 
   async login(): Promise<void> {
     try {
-      console.log(this.loginForm.value);
-    } catch (error) {
+      this.loader.show();
+      const data = await this.authServe.login(this.loginForm.value);
+      console.log(data);
+      this.invalidDetails = '';
+    } catch (error: any) {
       console.log(error);
+      this.invalidDetails = error?.error.message
     } finally {
       this.loader.hide();
     }
