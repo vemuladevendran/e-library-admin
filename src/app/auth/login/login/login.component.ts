@@ -24,6 +24,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // clearing error message
+  clearErrorMessage() {
+    this.invalidDetails = ''
+  }
 
   async login(): Promise<void> {
     try {
