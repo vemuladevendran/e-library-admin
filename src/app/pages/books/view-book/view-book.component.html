@@ -5,23 +5,25 @@
                 decoding="async" loading="lazy" class="book-preview-img">
         </div>
         <div class="col-12 col-md-6">
-            <p>Title : <span>{{details.title}}</span></p>
-            <p>Author : <span>{{details.author?.authorName}}</span></p>
-            <p>Code : <span>{{details.code}}</span></p>
-            <p>Category : <span>{{details.category}}</span></p>
-            <p>PublishedYear : <span>{{details.publishedYear | date}}</span></p>
+            <p>Title : <span class="text-primary">{{details.title}}</span></p>
+            <p>Author : <span class="text-primary">{{details.author?.authorName}}</span></p>
+            <p>Code : <span class="text-primary">{{details.code}}</span></p>
+            <p>Category : <span class="text-primary">{{details.category}}</span></p>
+            <p>PublishedYear : <span class="text-primary">{{details.publishedYear | date}}</span></p>
         </div>
-        <div class="col-12 col-md-6">
-            <p>PreferredYear : <span>{{details.preferredYear}}</span></p>
-            <p>Publisher : <span>{{details.publisher}}</span></p>
-            <p>Avalible : <span>{{details.totalCount}}</span></p>
-
-        </div>
-        <div class="col-12 col-md-6">
-            <button class="btn btn-primary btn-sm rounded shadow" mat-button mat-dialog-close
-                [routerLink]="['books/edit-book/',details._id]">
-                Update Book Details
-            </button>
+        <div class="col-12 mt-2">
+            <p>PreferredYear : <span class="text-primary">{{details.preferredYear}}</span></p>
+            <p>Publisher : <span class="text-primary">{{details.publisher}}</span></p>
+            <p>Avalible : <span class="text-primary">{{details.totalCount}}</span></p>
+            <div>
+                <button class="btn btn-primary btn-sm rounded shadow" mat-button mat-dialog-close
+                    [routerLink]="['books/edit-book/',details._id]">
+                    Update Book Details
+                </button>
+                <button type="button" class="btn btn-sm rounded shadow ms-3 border-dark">
+                    <mat-icon class="align-middle">share</mat-icon> Share
+                </button>
+            </div>
         </div>
     </div>
 </div>

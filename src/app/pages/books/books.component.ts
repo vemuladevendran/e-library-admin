@@ -40,19 +40,8 @@ export class BooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBookList(this.filters);
-    this.getMostVisitedBooks();
   }
 
-  // get most visited book
-  async getMostVisitedBooks(): Promise<void> {
-    try {
-      const result = await this.bookServe.mostVisitedBooks();
-      console.log(result, 'data');
-    } catch (error) {
-      console.log(error);
-
-    }
-  }
 
   // get author list
   async authorList(): Promise<void> {
