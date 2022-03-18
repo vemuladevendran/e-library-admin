@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6 col-md-4 col-lg-3 border-end border-bottom p-2 d-flex flex-column align-items-center"
+        <div class="col-6 col-md-4 col-lg-3 border-end border-bottom p-2 d-flex flex-column align-items-center my-3"
             *ngFor="let book of bookList" (click)="openDialog($event,book)">
             <div class="book-image-wrapper">
                 <img [src]="book?.image?.url ? book?.image?.url : '/assets/book-2.webp'" alt="book preview"

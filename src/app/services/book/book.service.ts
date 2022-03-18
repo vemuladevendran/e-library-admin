@@ -50,4 +50,16 @@ export class BookService {
     const url = `${this.settings.API_BASE_URL}/book/category`;
     return lastValueFrom(this.http.get(url));
   }
+
+  // visit book
+  bookVisited(id: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/book/visit/${id}`;
+    return lastValueFrom(this.http.get(url));
+  }
+
+  // most visited books
+  mostVisitedBooks(): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/book/most-visited-books`;
+    return lastValueFrom(this.http.get(url));
+  }
 }
