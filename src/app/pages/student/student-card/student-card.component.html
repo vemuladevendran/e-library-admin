@@ -25,7 +25,8 @@
             </mat-icon>
         </div>
         <div class="border rounded-circle icon delete">
-            <mat-icon aria-hidden="false" aria-label="Edit" matTooltip="Delete">delete</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Edit" matTooltip="Delete"
+                (click)="deleteStudent(student?.id, $event)">delete</mat-icon>
         </div>
     </div>
 </div>
