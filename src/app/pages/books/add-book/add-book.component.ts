@@ -152,7 +152,6 @@ export class AddBookComponent implements OnInit {
   }
 
   // update form data
-
   updateFormData(): void {
     const formValues = this.createBookForm.value;
     Object.entries(formValues).forEach(([key, value]: any) => {
