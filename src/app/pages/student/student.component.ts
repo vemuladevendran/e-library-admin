@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-student',
@@ -12,14 +13,26 @@ import { FormGroup } from '@angular/forms';
 })
 export class StudentComponent implements OnInit {
   studentsList: any[] = [];
-  // filtersForm: FormGroup;
+  filtersForm: FormGroup;
   filters: any;
 
   constructor(
     private studentServe: StudentService,
     private loader: LoaderService,
-    private toast: ToastrService
-  ) { }
+    private toast: ToastrService,
+    private fb: FormBuilder,
+  ) {
+    this.filtersForm = this.fb.group({
+      year: [''],
+      rollNumber: [''],
+      name: ['']
+    });
+    this.filtersForm.valueChanges.pipe(debounceTime(800))
+      .subscribe(() => {
+        this.filters = this.filtersForm?.value;
+        this.getStudentDetails(this.filters);
+      });
+  }
 
   ngOnInit(): void {
     this.getStudentDetails(this.filters);
@@ -51,10 +64,13 @@ export class StudentComponent implements OnInit {
     });
     if (result.isConfirmed) {
       try {
-
+        this.loader.show();
+        await this.studentServe.deleteStudent(e);
+        this.getStudentDetails(this.filters);
       } catch (error) {
         console.log(error, 'fail to delete');
-
+      } finally {
+        this.loader.hide();
       }
     }
   }

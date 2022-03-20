@@ -25,8 +25,14 @@ export class StudentService {
     const url = `${this.settings.API_BASE_URL}/student`;
     return lastValueFrom(this.http.post(url, data));
   }
+
   updateStudent(data: any, id: string): Promise<any> {
     const url = `${this.settings.API_BASE_URL}/student/${id}`;
     return lastValueFrom(this.http.put(url, data));
+  }
+
+  deleteStudent(id: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/student/${id}`;
+    return lastValueFrom(this.http.delete(url));
   }
 }
