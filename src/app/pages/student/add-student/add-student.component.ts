@@ -35,7 +35,7 @@ export class AddStudentComponent implements OnInit {
       rollNumber: ['', [Validators.required]],
       dob: ['', [Validators.required]],
       year: ['', [Validators.required]],
-      mobileNumber: ['', [Validators.required]],
+      mobileNumber: ['', [Validators.required, Validators.minLength(10)]],
       membership: [true, [Validators.required]],
       image: [null],
     });

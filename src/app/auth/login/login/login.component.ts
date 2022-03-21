@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Toast } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private loader: LoaderService,
     private authServe: AuthService,
+    private tokenserve: TokenService,
+    private router: Router,
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -33,7 +37,13 @@ export class LoginComponent implements OnInit {
     try {
       this.loader.show();
       const data = await this.authServe.login(this.loginForm.value);
-      console.log(data);
+
+      if (!data.token) {
+        window.alert('Failed to login');
+        return;
+      }
+      this.tokenserve.saveToken(data?.token);
+      this.router.navigate(['/books']);
       this.invalidDetails = '';
     } catch (error: any) {
       console.log(error);

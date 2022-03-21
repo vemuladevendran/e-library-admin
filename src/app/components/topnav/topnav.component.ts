@@ -33,12 +33,12 @@ export class TopnavComponent implements OnInit {
   }
 
 
-  // showLoginIcon() {
-  //   this.isLoggedIn = this.auth.isLoggedIn();
-  // }
+  showLoginIcon() {
+    this.isLoggedIn = this.auth.isLoggedIn();
+  }
 
   logout() {
-    // this.auth.logout();
+    this.auth.logout();
     console.log('Clicked On Logout');
   }
 

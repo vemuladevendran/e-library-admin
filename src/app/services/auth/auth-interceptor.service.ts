@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpHeaders } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { throwError } from 'rxjs';
+import { from, lastValueFrom, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -15,33 +15,37 @@ export class AuthInterceptorService implements HttpInterceptor {
     private auth: AuthService,
   ) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const token = this.tokenServ.getToken();
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return from(this.handleReq(req, next));
+  }
 
-    if (token) {
-      const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-      req = req.clone({ headers });
+  private async handleReq(req: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
+    const token: any = await this.tokenServ.getToken();
+    if (!!token) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+    } else {
+      this.auth.logout();
     }
 
-    return next.handle(req)
-      .pipe(
-        catchError(error => {
-          // console.warn(error);
 
-          // Checking if it is an Authentication Error (401)
-          if (error.status === 401) {
-            // this.auth.logout();
-          }
-
-          // Checking if user cannot access this resource
-          if (error.status === 403) {
-            console.warn('You can not access this resource');
-          }
-
-          // If it is not an authentication error, just throw it
-          return throwError(error);
-        })
-      );
+    return lastValueFrom(next.handle(req)
+    .pipe(
+      catchError(error => {
+        const messages = ['jwt expired', 'Session Expired'];
+        if ((error.status === 401) && messages.includes(error?.error.message)) {
+          this.auth.logout();
+        }
+        if (error.status === 403) {
+          console.warn('You can not access this resource');
+        }
+        return throwError(() => error);
+      })
+    ));
 
   }
 }

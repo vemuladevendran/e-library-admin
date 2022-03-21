@@ -18,7 +18,7 @@ export class TokenService {
   }
 
   isTokenExist() {
-    return this.getToken() ? true : false;
+    return !!this.getToken();
   }
 
   removeToken() {

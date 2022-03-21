@@ -21,18 +21,18 @@ export class AuthService {
     private token: TokenService
   ) { }
 
-  login(data: any) {
+  login(data: any): Promise<any> {
     const url = `${this.settings.API_BASE_URL}/auth/admin`;
     return lastValueFrom(this.http.post(url, data))
   }
 
-  // isLoggedIn() {
-  //   return this.token.isTokenExist();
-  // }
+  isLoggedIn() {
+    return this.token.isTokenExist();
+  }
 
-  // logout() {
-  //   this.token.removeToken();
-  //   this.router.navigate(['/login']);
-  // }
+  logout() {
+    this.token.removeToken();
+    this.router.navigate(['/login']);
+  }
 
 }

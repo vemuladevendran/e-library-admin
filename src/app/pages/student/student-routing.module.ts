@@ -6,10 +6,11 @@ import { StudentComponent } from './student.component';
 const routes: Routes = [
   { path: '', component: StudentComponent },
   { path: 'add-student', component: AddStudentComponent },
+  { path: 'edit-student/:id', component: AddStudentComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class StudentRoutingModule {}
+export class StudentRoutingModule { }

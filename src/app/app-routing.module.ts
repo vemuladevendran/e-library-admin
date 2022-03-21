@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppShellComponent } from './components/app-shell/app-shell.component';
+import { AuthGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
       import('./auth/login/login.module').then((m) => m.LoginModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'signup',
     loadChildren: () =>
       import('./auth/signup/signup.module').then((m) => m.SignupModule),
+      canActivate: [AuthGuard]
   },
   {
     path: 'forgot-password',
@@ -23,6 +26,7 @@ const routes: Routes = [
   {
     path: '',
     component: AppShellComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'authors', loadChildren: () => import('./pages/author/author.module').then(m => m.AuthorModule) },
       { path: 'books', loadChildren: () => import('./pages/books/books.module').then(m => m.BooksModule) },
@@ -32,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/authors',
+    redirectTo: '/books',
   },
 ];
 
