@@ -13,37 +13,18 @@ export class TopnavComponent implements OnInit {
   @Input() snav: any;
   title = '';
   timeDate = new Date();
-  userName = ''
+  @Input() userName = '';
   constructor(
     private auth: AuthService,
-    private tokenServe: TokenService,
-    private loaderService: LoaderService
   ) {
     setInterval(() => {
       this.timeDate = new Date();
     }, 1);
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.getUserDetails();
-    this.getUserName();
+  ngOnInit() {
   }
 
-  getUserName(): any {
-    this.userName = this.tokenServe.getUserName();
-  }
-
-  async getUserDetails(): Promise<void> {
-    try {
-      this.loaderService.show();
-      const data = await this.auth.getUserDetails();
-      this.tokenServe.setUserName(data.user.username);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.loaderService.hide();
-    }
-  }
 
   toggleSideNav() {
     this.snav?.toggle();

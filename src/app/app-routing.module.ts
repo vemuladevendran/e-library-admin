@@ -32,7 +32,7 @@ const routes: Routes = [
       { path: 'books', loadChildren: () => import('./pages/books/books.module').then(m => m.BooksModule) },
       { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
       { path: 'student', loadChildren: () => import('./pages/student/student.module').then((m) => m.StudentModule), },
-      { path: 'issue-book', loadChildren: () => import('./pages/issue-book/issue-book.module').then(m => m.IssueBookModule) },
+      { path: 'issue-book-dashboard', loadChildren: () => import('./pages/issue-book-dashboard/issue-book-dashboard.module').then(m => m.IssueBookDashboardModule) },
     ],
   },
   {

@@ -16,7 +16,7 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 export class AppShellComponent implements OnInit {
 
   menuItems = menuList;
-
+  user: any;
   mobileQuery = this.media.matchMedia('(max-width: 600px)');
   title = '';
   constructor(
@@ -25,14 +25,34 @@ export class AppShellComponent implements OnInit {
     // private dialog: MatDialog,
     private seo: SeoService,
     private router: Router,
-  ) { }
+    private token: TokenService,
+    private loaderService: LoaderService
+  ) {
+  }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.router.url === '/') {
       this.router.navigate(['books']);
     }
+    await this.setUserDetails();
+    this.getUserDetails();
   }
 
- 
+  getUserDetails() {
+    this.user = this.token.getUserName();
+  }
+
+  async setUserDetails(): Promise<void> {
+    try {
+      this.loaderService.show();
+      const data = await this.auth.getUserDetails();
+      this.token.setUserName(data.user);
+      console.log(data, 'calling setting')
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.loaderService.hide();
+    }
+  }
 
 }

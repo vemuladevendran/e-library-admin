@@ -11,7 +11,7 @@
     <div class="uv-brand d-flex align-items-center ps-0">
       <span class="d-flex align-items-center mat-list-item-content">
         <img src="/assets/admin-img.png" decoding="async" loading="lazy" alt="id">
-        <span class="sidenav-navlink-text text-white ps-2">Admin</span>
+        <span class="sidenav-navlink-text text-white ps-2 text-uppercase">{{user?.username}}</span>
       </span>
     </div>
     <hr class="text-white">
@@ -31,7 +31,7 @@
   <!-- Sidenav Ends -->
 
   <mat-sidenav-content class="uv-sidenav-content">
-    <app-topnav [snav]="snav"></app-topnav>
+    <app-topnav [snav]="snav" [userName]="user?.username"></app-topnav>
     <main class="m-3 m-md-5 h-100">
       <router-outlet></router-outlet>
     </main>
