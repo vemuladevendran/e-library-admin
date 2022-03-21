@@ -47,7 +47,6 @@ export class AppShellComponent implements OnInit {
       this.loaderService.show();
       const data = await this.auth.getUserDetails();
       this.token.setUserName(data.user);
-      console.log(data, 'calling setting')
     } catch (error) {
       console.log(error);
     } finally {
