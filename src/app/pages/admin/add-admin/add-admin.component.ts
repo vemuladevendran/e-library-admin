@@ -32,6 +32,7 @@ export class AddAdminComponent implements OnInit {
       this.loader.show();
       const result = await this.adminServe.createAdmin(this.createAdminForm.value);
       this.toast.success('Created');
+      this.toast.info('Password Send to registerd mail id')
       this.router.navigate(['/admin'])
     } catch (error: any) {
       console.log(error);
