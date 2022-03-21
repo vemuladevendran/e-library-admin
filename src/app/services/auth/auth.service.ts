@@ -4,6 +4,7 @@ import { SettingsService } from '../settings/settings.service';
 import { Router } from '@angular/router';
 import { TokenService } from '../token/token.service';
 import { lastValueFrom } from 'rxjs';
+import { LoaderService } from '../loader/loader.service';
 
 interface LoginResponse {
   token: string;
@@ -18,13 +19,20 @@ export class AuthService {
     private http: HttpClient,
     private settings: SettingsService,
     private router: Router,
-    private token: TokenService
-  ) { }
+    private token: TokenService,
+  ) {
+   }
 
   login(data: any): Promise<any> {
     const url = `${this.settings.API_BASE_URL}/auth/admin`;
     return lastValueFrom(this.http.post(url, data))
   }
+
+  getUserDetails(): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/auth/admin/me`;
+    return lastValueFrom(this.http.get(url))
+  }
+
 
   isLoggedIn() {
     return this.token.isTokenExist();
@@ -33,6 +41,9 @@ export class AuthService {
   logout() {
     this.token.removeToken();
     this.router.navigate(['/login']);
+  }
+
+  ngOnInit() {
   }
 
 }

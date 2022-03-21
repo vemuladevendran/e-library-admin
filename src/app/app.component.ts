@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { debounceTime } from 'rxjs';
+import { AuthService } from './services/auth/auth.service';
 import { LoaderService } from './services/loader/loader.service';
+import { TokenService } from './services/token/token.service';
 declare const loadFreshDesk: () => {};
 
 @Component({
@@ -9,10 +11,13 @@ declare const loadFreshDesk: () => {};
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  
+
   title = 'uv-ng-material-template';
   showLoader = false;
-  constructor(private loaderService: LoaderService) {}
+  constructor(
+    private loaderService: LoaderService,
+  ) {
+  }
 
   ngOnInit() {
     this.loaderService.status

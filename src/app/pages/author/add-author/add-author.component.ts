@@ -23,7 +23,7 @@ export class AddAuthorComponent implements OnInit {
   ) {
     this.authorForm = this.fb.group({
       authorName: ['', [Validators.required]],
-      authorEmail: ['', [Validators.required]],
+      authorEmail: [''],
     });
     this.authorId = this.route.snapshot.paramMap.get('id') ?? '';
   }
