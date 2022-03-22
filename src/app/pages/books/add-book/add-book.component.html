@@ -62,7 +62,7 @@
                         <div class="position-relative cursor-pointer" *ngIf="selectedImagePreviewURL === ''">
                             <img [src]="selectedImagePreviewURL === '' ? '/assets/book-2.webp' : selectedImagePreviewURL "
                                 alt="Upload book image" class="w-100 book-img" (click)="openFileSelectionDialog()">
-                            <!-- <p class="upload-title text-center text-danger h5">Upload Book Image</p> -->
+                            <p class="upload-title w-100 text-center text-dark fw-bold" (click)="openFileSelectionDialog()">Upload Book Image</p>
                         </div>
                         <!-- after selected book image -->
                         <div class="position-relative cursor-pointer" *ngIf="selectedImagePreviewURL !== ''">

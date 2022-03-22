@@ -39,6 +39,12 @@ export class BookService {
     return lastValueFrom(this.http.get(url));
   }
 
+  // get book by Code
+  getBookByCode(code: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/book/code`;
+    return lastValueFrom(this.http.post(url, { code: code }));
+  }
+
   // delete book
   deleteBook(id: string): Promise<any> {
     const url = `${this.settings.API_BASE_URL}/book/${id}`;
@@ -62,4 +68,5 @@ export class BookService {
     const url = `${this.settings.API_BASE_URL}/book/most-visited-books`;
     return lastValueFrom(this.http.get(url));
   }
+
 }

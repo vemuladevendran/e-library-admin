@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BookService } from 'src/app/services/book/book.service';
+import { IssueBookService } from 'src/app/services/issue-book/issue-book.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { StudentService } from 'src/app/services/student/student.service';
 
@@ -14,11 +16,14 @@ export class IssueBookComponent implements OnInit {
   rollNumber = new FormControl();
   bookCode = new FormControl();
   studentData: any;
+  bookData: any;
   constructor(
     private studentServe: StudentService,
     private bookServe: BookService,
+    private bookIssueServe: IssueBookService,
     private loader: LoaderService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -30,8 +35,8 @@ export class IssueBookComponent implements OnInit {
         this.toast.info('Please Enter Roll Number');
         return;
       }
+      this.loader.show();
       this.studentData = await this.studentServe.getStudentByRollNumber(this.rollNumber.value)
-      console.log(this.studentData);
     } catch (error: any) {
       console.log(error);
       this.toast.error(error.error?.message)
@@ -42,7 +47,29 @@ export class IssueBookComponent implements OnInit {
 
   async getBookDetails(): Promise<void> {
     try {
-      console.log(this.bookCode.value);
+      this.loader.show();
+      this.bookData = await this.bookServe.getBookByCode(this.bookCode.value);
+    } catch (error: any) {
+      console.log(error);
+      this.toast.error(error?.error.message)
+    } finally {
+      this.loader.hide();
+    }
+  }
+
+  async issueBook(): Promise<void> {
+    try {
+      this.loader.show();
+      let data;
+      if (this.studentData && this.bookData) {
+        data = {
+          studentId: this.studentData._id,
+          bookId: this.bookData._id
+        }
+      }
+      const result = await this.bookIssueServe.issueBook(data);
+      this.toast.success('Book Issued Successfuly');
+      this.router.navigate(['/issue-book-dashboard'])
     } catch (error: any) {
       console.log(error);
       this.toast.error(error?.error.message)
