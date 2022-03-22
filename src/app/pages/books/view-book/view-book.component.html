@@ -9,12 +9,14 @@
             <p>Author : <span class="text-primary">{{details.author?.authorName}}</span></p>
             <p>Code : <span class="text-primary">{{details.code}}</span></p>
             <p>Category : <span class="text-primary">{{details.category}}</span></p>
+            <p>Edition : <span class="text-primary">{{details.edition}}</span></p>
             <p>PublishedYear : <span class="text-primary">{{details.publishedYear | date}}</span></p>
         </div>
         <div class="col-12 mt-2">
             <p>PreferredYear : <span class="text-primary">{{details.preferredYear}}</span></p>
             <p>Publisher : <span class="text-primary">{{details.publisher}}</span></p>
             <p>Avalible : <span class="text-primary">{{details.totalCount}}</span></p>
+            <p>Price : <span class="text-primary">{{details.price}}</span></p>
             <div>
                 <button class="btn btn-primary btn-sm rounded shadow" mat-button mat-dialog-close
                     [routerLink]="['books/edit-book/',details._id]">

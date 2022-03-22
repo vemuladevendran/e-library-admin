@@ -50,12 +50,19 @@
                                 <input matInput formControlName="totalCount" type="number" min="1" />
                             </mat-form-field>
                         </div>
+                        <div>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Price</mat-label>
+                                <input matInput formControlName="price" type="number" min="1" />
+                            </mat-form-field>
+                        </div>
                     </div>
-                    <div class="col-12 col-lg-6 mt-4 mt-md-0 d-flex justify-content-center border-start border-danger">
+                    <div
+                        class="col-12 col-lg-6 mt-4 mt-md-0 d-flex justify-content-center align-items-center border-start border-danger">
                         <div class="position-relative cursor-pointer" *ngIf="selectedImagePreviewURL === ''">
                             <img [src]="selectedImagePreviewURL === '' ? '/assets/book-2.webp' : selectedImagePreviewURL "
                                 alt="Upload book image" class="w-100 book-img" (click)="openFileSelectionDialog()">
-                            <p class="upload-title text-center text-danger h5">Upload Book Image</p>
+                            <!-- <p class="upload-title text-center text-danger h5">Upload Book Image</p> -->
                         </div>
                         <!-- after selected book image -->
                         <div class="position-relative cursor-pointer" *ngIf="selectedImagePreviewURL !== ''">
@@ -106,6 +113,12 @@
                         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
                         <mat-datepicker #dp startView="multi-year" panelClass="example-month-picker">>
                         </mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Edition</mat-label>
+                        <input matInput formControlName="edition" type="number" min="1" />
                     </mat-form-field>
                 </div>
                 <div>

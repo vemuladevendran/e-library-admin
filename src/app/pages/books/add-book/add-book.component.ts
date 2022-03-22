@@ -44,6 +44,8 @@ export class AddBookComponent implements OnInit {
       publishedYear: ['', [Validators.required]],
       publisher: ['', [Validators.required]],
       totalCount: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      edition: ['', [Validators.required]],
     })
     this.bookId = this.route.snapshot.paramMap.get('id') ?? '';
   }

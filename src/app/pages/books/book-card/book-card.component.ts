@@ -29,8 +29,8 @@ export class BookCardComponent implements OnInit {
   openDialog(e: any, data: any) {
     e.stopPropagation();
     const dialogRef = this.dialog.open(ViewBookComponent, {
-      width: '500px',
-      height: '350px',
+      width: '530px',
+      height: '390px',
       panelClass: 'zero-padding-panel',
       data: {
         data

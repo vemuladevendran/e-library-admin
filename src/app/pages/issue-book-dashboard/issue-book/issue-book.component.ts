@@ -12,6 +12,7 @@ import { StudentService } from 'src/app/services/student/student.service';
 })
 export class IssueBookComponent implements OnInit {
   rollNumber = new FormControl();
+  bookCode = new FormControl();
   studentData: any;
   constructor(
     private studentServe: StudentService,
@@ -34,6 +35,17 @@ export class IssueBookComponent implements OnInit {
     } catch (error: any) {
       console.log(error);
       this.toast.error(error.error?.message)
+    } finally {
+      this.loader.hide();
+    }
+  }
+
+  async getBookDetails(): Promise<void> {
+    try {
+      console.log(this.bookCode.value);
+    } catch (error: any) {
+      console.log(error);
+      this.toast.error(error?.error.message)
     } finally {
       this.loader.hide();
     }
