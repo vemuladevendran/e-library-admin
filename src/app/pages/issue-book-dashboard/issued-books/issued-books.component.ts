@@ -9,7 +9,7 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
   styleUrls: ['./issued-books.component.scss']
 })
 export class IssuedBooksComponent implements OnInit {
-
+  booksList: any[] = [];
   constructor(
     private bookIssueServe: IssueBookService,
     private toast: ToastrService,
@@ -20,7 +20,7 @@ export class IssuedBooksComponent implements OnInit {
     try {
       this.loader.show();
       const data = await this.bookIssueServe.getIssuedBooks();
-      console.log(data);
+      this.booksList = data;
     } catch (error: any) {
       console.log(error);
       this.toast.error(error?.error.messge)
