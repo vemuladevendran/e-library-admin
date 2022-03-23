@@ -46,8 +46,10 @@ export class IssueBookService {
   }
 
   // get due books
-  getDueBooks(): Promise<any> {
+  getDueBooks(filters?: any): Promise<any> {
     const url = `${this.settings.API_BASE_URL}/book-issue/due-book-list`;
-    return lastValueFrom(this.http.get(url));
+    return lastValueFrom(this.http.get(url, {
+      params: filters,
+    }));
   }
 }
