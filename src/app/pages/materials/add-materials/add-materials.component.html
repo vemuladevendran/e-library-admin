@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="row" [formGroup]="createMaterialForm">
+    <form class="row" [formGroup]="createMaterialForm" (ngSubmit)="uploadMaterial()">
         <!-- title details -->
         <div class="col-12 d-flex justify-content-between">
             <h1> Add Materials</h1>
@@ -49,33 +49,40 @@
                     <textarea matInput placeholder="Description" formControlName="description"></textarea>
                 </mat-form-field>
             </div>
+            <div class="mt-2 text-center">
+                <button class="btn btn-primary btn-sm rounded shadow m-0 text-white"
+                    [disabled]="createMaterialForm.invalid">
+                    Create Material
+                </button>
+            </div>
         </mat-card>
         <div class="col-12 col-md-6 mt-3 mt-md-0">
             <!-- upload icon -->
             <div>
-                <p class="fs-5 cursor-pointer" (click)="openFileSelectionDialog()">
-                    <span>Upload Material</span>
-                    <span class="ms-3" style="vertical-align: text-bottom;">
+                <div class="fs-5 d-flex align-items-center">
+                    <div>Upload Material</div>
+                    <div class="ms-3 d-flex cursor-pointer" (click)="openFileSelectionDialog()">
+                        <p class="fs-6 text-primary m-0">click to upload</p>
                         <mat-icon class="text-primary">
                             attach_file
                         </mat-icon>
-                    </span>
-                </p>
+                    </div>
+                </div>
                 <input id="material-file" (change)="handleFileSelection()" accept=".pdf,.doc" type="file" class="d-none"
                     #materialFile />
             </div>
             <!-- upload file -->
-            <div class="text-center text-danger" *ngIf="selectedFilePreviewURL === ''">
+            <div class="text-center text-danger mt-3" *ngIf="selectedFilePreviewURL === ''">
                 No file Selected
             </div>
             <div *ngIf="selectedFilePreviewURL !== ''">
-                <mat-card>
+                <mat-card class="mt-3">
                     <p>Selected File</p>
                     <div class="d-flex align-items-center justify-content-between">
                         <mat-icon>file_present</mat-icon>
                         <p class="text-info file-name-wrapper cursor-pointer" (click)="viewPreviewPdf()">
                             {{selectedFilePreviewURL}}</p>
-                        <mat-icon class="cursor-pointer" (click)="selectedFilePreviewURL = ''"
+                        <mat-icon class="cursor-pointer" (click)="removeSelectedFile()"
                             *ngIf="selectedFilePreviewURL !== ''">
                             cancel
                         </mat-icon>
@@ -85,7 +92,7 @@
             <!-- preview pdf -->
             <mat-card class="mt-3" *ngIf="pdfPeviewFile && selectedFilePreviewURL !== '' ">
                 <div class="d-flex justify-content-between bg-muted py-3 px-1">
-                    <div>{{selectedFilePreviewURL}}</div>
+                    <div class="file-name-wrapper">{{selectedFilePreviewURL}}</div>
                     <div class="d-flex">
                         <div class="me-3">
                             <mat-icon class="cursor-pointer me-2" (click)="increaseZoomLevel()">
