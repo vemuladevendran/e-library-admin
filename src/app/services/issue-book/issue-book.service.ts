@@ -31,7 +31,7 @@ export class IssueBookService {
   // return book
   returnBook(bookId: string, id: string): Promise<any> {
     const url = `${this.settings.API_BASE_URL}/book-issue/return-book/${id}`;
-    return lastValueFrom(this.http.post(url, bookId));
+    return lastValueFrom(this.http.post(url, { bookId: bookId }));
   }
   // get return books
   getReturnBooks(): Promise<any> {
@@ -42,7 +42,7 @@ export class IssueBookService {
   // renewal book
   renewalBook(bookId: string, id: string): Promise<any> {
     const url = `${this.settings.API_BASE_URL}/book-issue/renewal-book/${id}`;
-    return lastValueFrom(this.http.post(url, bookId));
+    return lastValueFrom(this.http.post(url, { bookId: bookId }));
   }
 
   // get due books
