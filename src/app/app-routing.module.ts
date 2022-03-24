@@ -33,6 +33,7 @@ const routes: Routes = [
       { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
       { path: 'student', loadChildren: () => import('./pages/student/student.module').then((m) => m.StudentModule), },
       { path: 'issue-book-dashboard', loadChildren: () => import('./pages/issue-book-dashboard/issue-book-dashboard.module').then(m => m.IssueBookDashboardModule) },
+      { path: 'materials', loadChildren: () => import('./pages/materials/materials.module').then(m => m.MaterialsModule) },
     ],
   },
   {
