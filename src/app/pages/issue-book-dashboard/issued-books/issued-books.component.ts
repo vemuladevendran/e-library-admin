@@ -61,6 +61,7 @@ export class IssuedBooksComponent implements OnInit {
         this.loader.show();
         await this.bookIssueServe.returnBook(data.bookId._id, data._id)
         this.toast.success('Returned')
+        location.reload();
         this.getBooks(this.filters);
       } catch (error: any) {
         console.log(error);
