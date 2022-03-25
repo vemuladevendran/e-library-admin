@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MaterialsService } from 'src/app/services/materials/materials.service';
+import { ViewMaterialComponent } from './view-material/view-material.component';
 
 @Component({
   selector: 'app-materials',
@@ -16,6 +18,7 @@ export class MaterialsComponent implements OnInit {
     private materialServe: MaterialsService,
     private loader: LoaderService,
     private toast: ToastrService,
+    private dialog: MatDialog,
   ) { }
 
 
@@ -31,6 +34,20 @@ export class MaterialsComponent implements OnInit {
     finally {
       this.loader.hide();
     }
+  }
+  // opening view dialog
+  openDialog(data: any) {
+    const dialogRef = this.dialog.open(ViewMaterialComponent, {
+      width: '530px',
+      height: '390px',
+      panelClass: 'zero-padding-panel',
+      data: {
+        data
+      }
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log(result);
+    });
   }
 
   ngOnInit(): void {
