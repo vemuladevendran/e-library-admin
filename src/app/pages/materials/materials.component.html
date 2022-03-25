@@ -10,4 +10,25 @@
             </div>
         </div>
     </section>
+    <!-- materials view -->
+    <section class="row">
+        <div class="col-12 col-md-4 col-lg-3 my-1" *ngFor="let pdf of materialsList">
+            <mat-card class="position-relative pdf-card">
+                <!-- pop up wrapper -->
+                <div class="pop-up-wrapper position-absolute">
+                    <mat-icon class="fs-1 text-white">center_focus_strong</mat-icon>
+                </div>
+                <!-- <img src="/assets/thumbnail.png" alt="Thumbnail" class="thumbnail-img"> -->
+                <div class="shadow">
+                    <pdf-viewer [src]="pdf?.file?.url" [render-text]="true" [original-size]="false"
+                        class="thumbnail-img">
+                    </pdf-viewer>
+                </div>
+                <div class="pdf-details-wrapper">
+                    <p class="text-center fw-bold">{{pdf.title}}</p>
+                    <p class="description-text">{{pdf.description}}</p>
+                </div>
+            </mat-card>
+        </div>
+    </section>
 </div>

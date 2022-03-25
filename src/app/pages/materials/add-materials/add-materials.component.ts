@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BookService } from 'src/app/services/book/book.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { MaterialsService } from 'src/app/services/materials/materials.service';
 
 @Component({
   selector: 'app-add-materials',
@@ -24,6 +25,7 @@ export class AddMaterialsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private bookServe: BookService,
+    private materialServe: MaterialsService,
     private sanitizer: DomSanitizer,
     private loader: LoaderService,
     private toast: ToastrService,
@@ -98,16 +100,15 @@ export class AddMaterialsComponent implements OnInit {
   async uploadMaterial(): Promise<void> {
     try {
       // checking image file
-      console.log(this.selectedFile, typeof(this.selectedFile));
       if (this.selectedFile == null || undefined) {
         this.toast.info('Please select the file')
         return;
       };
-      // this.updateFormData();
-      // this.loader.show();
-      // await this.bookServe.createBook(this.formData);
-      // this.toast.success('uploaded');
-      // this.router.navigate(['/materials'])
+      this.updateFormData();
+      this.loader.show();
+      await this.materialServe.uploadMaterials(this.formData);
+      this.toast.success('uploaded');
+      this.router.navigate(['/materials'])
     } catch (error: any) {
       this.toast.error(error?.error?.message)
       console.log(error);
