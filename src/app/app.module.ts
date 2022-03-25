@@ -12,6 +12,8 @@ import { AuthInterceptorService } from './services/auth/auth-interceptor.service
 import { LoaderService } from './services/loader/loader.service';
 import { AuthService } from './services/auth/auth.service';
 import { TokenService } from './services/token/token.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 // HttpClientModule
 
@@ -29,6 +31,12 @@ import { TokenService } from './services/token/token.service';
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       progressBar: true,
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
   providers: [
