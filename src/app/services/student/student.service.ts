@@ -40,4 +40,9 @@ export class StudentService {
     const url = `${this.settings.API_BASE_URL}/student/${id}`;
     return lastValueFrom(this.http.delete(url));
   }
+
+  promoteStudents(year: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/student/promote`;
+    return lastValueFrom(this.http.post(url, { selectedYear: year }));
+  }
 }
