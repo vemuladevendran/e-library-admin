@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-between align-items-center">
       <div>
-        <h1>Create Student</h1>
+        <h1> {{studentId !== '' ? 'Update' : 'Create'}} Student</h1>
       </div>
       <div class="d-none d-md-block"><a routerLink="/student">student</a> / add-student</div>
     </div>
@@ -93,7 +93,7 @@
           </div>
           <div>
             <button class="btn btn-primary btn-sm rounded shadow" [disabled]="createStudentForm.invalid">
-              create student
+              {{studentId !== '' ? 'update' : 'create'}} student
             </button>
           </div>
         </div>

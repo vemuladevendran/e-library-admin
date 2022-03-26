@@ -23,4 +23,10 @@ export class MaterialsService {
     const url = `${this.settings.API_BASE_URL}/material`;
     return lastValueFrom(this.http.get(url));
   }
+
+  // delete materials
+  deleteMaterial(id: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/material/${id}`;
+    return lastValueFrom(this.http.delete(url));
+  }
 }

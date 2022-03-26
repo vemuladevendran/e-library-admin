@@ -49,6 +49,7 @@ export class AppShellComponent implements OnInit {
       this.token.setUserName(data.user);
     } catch (error) {
       console.log(error);
+      this.auth.logout();
     } finally {
       this.loaderService.hide();
     }
