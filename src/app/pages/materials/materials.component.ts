@@ -41,7 +41,7 @@ export class MaterialsComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewMaterialComponent, {
       width: '630px',
       height: '590px',
-      panelClass: 'zero-padding-panel',
+      // panelClass: 'zero-padding-panel',
       data: {
         data
       }
