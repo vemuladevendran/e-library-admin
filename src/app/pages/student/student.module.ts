@@ -12,8 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import { StudentCardComponent } from './student-card/student-card.component'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CommonComponentModule } from 'src/app/components/common-components/common-component.module';
 
 const materialModules = [
   MatInputModule,
@@ -27,12 +27,13 @@ const materialModules = [
 ];
 
 @NgModule({
-  declarations: [StudentComponent, AddStudentComponent, StudentCardComponent],
+  declarations: [StudentComponent, AddStudentComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,
     ReactiveFormsModule,
+    CommonComponentModule,
     ...materialModules,
   ],
 })
-export class StudentModule {}
+export class StudentModule { }

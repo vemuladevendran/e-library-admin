@@ -45,4 +45,11 @@ export class StudentService {
     const url = `${this.settings.API_BASE_URL}/student/promote`;
     return lastValueFrom(this.http.post(url, { selectedYear: year }));
   }
+
+  getPassedOutStudents(filters?: any): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/student/passed-out`;
+    return lastValueFrom(this.http.get(url, {
+      params: filters,
+    }));
+  }
 }

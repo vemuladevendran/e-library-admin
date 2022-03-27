@@ -35,6 +35,7 @@ const routes: Routes = [
       { path: 'issue-book-dashboard', loadChildren: () => import('./pages/issue-book-dashboard/issue-book-dashboard.module').then(m => m.IssueBookDashboardModule) },
       { path: 'materials', loadChildren: () => import('./pages/materials/materials.module').then(m => m.MaterialsModule) },
       { path: 'promote-students', loadChildren: () => import('./pages/promote-students/promote-students.module').then(m => m.PromoteStudentsModule) },
+      { path: 'passed-out', loadChildren: () => import('./pages/passed-out/passed-out.module').then(m => m.PassedOutModule) },
     ],
   },
   {
