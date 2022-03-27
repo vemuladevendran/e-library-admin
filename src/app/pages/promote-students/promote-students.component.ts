@@ -22,6 +22,10 @@ export class PromoteStudentsComponent implements OnInit {
 
 
   async promoteStudents(): Promise<void> {
+    if (!this.selectedYear.value) {
+      this.toast.info("Please select the year");
+      return;
+    }
     const result = await Swal.fire({
       title: 'Are you sure you want to update?',
       text: "You won't be able to revert this!",
@@ -34,11 +38,6 @@ export class PromoteStudentsComponent implements OnInit {
 
     if (result.isConfirmed) {
       try {
-        console.log(this.selectedYear.value);
-        if (!this.selectedYear.value) {
-          this.toast.info("Please select the year");
-          return;
-        }
         this.loader.show();
         const result = await this.studentServe.promoteStudents(this.selectedYear.value);
         this.toast.success('updated');
