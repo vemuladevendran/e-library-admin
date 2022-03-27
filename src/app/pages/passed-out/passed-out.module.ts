@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonComponentModule } from 'src/app/components/common-components/common-component.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EnableMembershipComponent } from './enable-membership/enable-membership.component';
 
 const materialModules = [
   MatInputModule,
@@ -28,6 +29,7 @@ const materialModules = [
 @NgModule({
   declarations: [
     PassedOutComponent,
+    EnableMembershipComponent,
   ],
   imports: [
     CommonModule,

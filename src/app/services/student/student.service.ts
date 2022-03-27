@@ -52,4 +52,14 @@ export class StudentService {
       params: filters,
     }));
   }
+
+  getPassedOutStudentByRollNumber(rollNumber: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/student/passed-out/${rollNumber}`;
+    return lastValueFrom(this.http.get(url));
+  }
+
+  enableMembership(id: string, year: string): Promise<any> {
+    const url = `${this.settings.API_BASE_URL}/student/membership-renewal/${id}`;
+    return lastValueFrom(this.http.post(url, { years: year }));
+  }
 }
