@@ -10,7 +10,7 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  dashBoardCount: any;
+  dashBoardCount: any[] = [];
   progressBarWith: any[] = [];
   youtubeForm: FormGroup
   constructor(

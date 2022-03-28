@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
+import { ReactiveFormsModule } from '@angular/forms';
 const materialModules = [
   MatInputModule,
   MatFormFieldModule,
@@ -24,6 +25,7 @@ const materialModules = [
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    ReactiveFormsModule,
     ...materialModules,
   ]
 })

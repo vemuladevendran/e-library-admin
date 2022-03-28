@@ -71,7 +71,7 @@
     <!-- youtube live video upload -->
     <section class="row align-items-center mt-5">
         <h2>Youtube live video upload</h2>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-lg-6 col-xl-4" [formGroup]="youtubeForm">
             <form>
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Video Title</mat-label>
@@ -86,7 +86,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-12 col-md-6 col-lg-8 mt-3 mt-md-0 border-start border-dark">
+        <div class="col-12 col-lg-6 col-xl-8 mt-3 mt-md-0 border-start border-dark">
             <h3>Video Title</h3>
             <iframe class="w-100" height="350" src="https://www.youtube.com/embed/OmD_ykd6azw"
                 title="YouTube video player" frameborder="0"
