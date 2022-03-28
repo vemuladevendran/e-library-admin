@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
@@ -11,11 +12,18 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 export class DashboardComponent implements OnInit {
   dashBoardCount: any;
   progressBarWith: any[] = [];
+  youtubeForm: FormGroup
   constructor(
     private dashboardServe: DashboardService,
     private loader: LoaderService,
-    private toast: ToastrService
-  ) { }
+    private toast: ToastrService,
+    private fb: FormBuilder,
+  ) {
+    this.youtubeForm = this.fb.group({
+      videoTitle: ['', [Validators.required]],
+      videoLink: ['', [Validators.required]],
+    })
+  }
 
 
   async getDashboardCount(): Promise<void> {

@@ -69,8 +69,28 @@
         </section>
     </section>
     <!-- youtube live video upload -->
-    <section class="row">
-        <div class="col-12 col-md-6"></div>
-        <div class="col-12 col-md-6"></div>
+    <section class="row align-items-center mt-5">
+        <h2>Youtube live video upload</h2>
+        <div class="col-12 col-md-6 col-lg-4">
+            <form>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Video Title</mat-label>
+                    <input matInput formControlName="videoTitle" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Video Link</mat-label>
+                    <input matInput formControlName="videoLink" />
+                </mat-form-field>
+                <div class="mt-3 text-center">
+                    <button class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 col-md-6 col-lg-8 mt-3 mt-md-0 border-start border-dark">
+            <h3>Video Title</h3>
+            <iframe class="w-100" height="350" src="https://www.youtube.com/embed/OmD_ykd6azw"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
+        </div>
     </section>
 </div>
