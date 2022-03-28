@@ -1,0 +1,76 @@
+<div class="container">
+    <section class="row justify-content-around">
+        <!-- count cards 1 -->
+        <h2 class="my-md-3">Dashboard</h2>
+        <section class="col-12 col-md-5 col-lg-3 col-xl-2 mt-1 count-card count-card-1">
+            <div class="card-icon">
+                <mat-icon>people_alt</mat-icon>
+            </div>
+            <div>
+                <p class="mb-0">Total Books</p>
+                <p class="mb-0">
+                    {{dashBoardCount[0]}}
+                </p>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" [style.width]="progressBarWith[0] + '%'"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </section>
+        <!-- count cards 2 -->
+        <section class="col-12 col-md-5 col-lg-3 col-xl-2 mt-1 count-card count-card-2">
+            <div class="card-icon">
+                <mat-icon>people_alt</mat-icon>
+            </div>
+            <div>
+                <p class="mb-0">Issued Books</p>
+                <p class="mb-0">
+                    {{dashBoardCount[1]}}
+                </p>
+                <div class="progress">
+                    <div class="progress-bar" style="background-color: #cc9648;" role="progressbar"
+                        [style.width]="progressBarWith[1] + '%'" aria-valuenow="25" aria-valuemin="0"
+                        aria-valuemax="100">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- count cards 3 -->
+        <section class="col-12 col-md-5 col-lg-3 col-xl-2 mt-1 count-card count-card-3">
+            <div class="card-icon">
+                <mat-icon>people_alt</mat-icon>
+            </div>
+            <div>
+                <p class="mb-0">Returned Books</p>
+                <p class="mb-0">
+                    {{dashBoardCount[2]}}
+                </p>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" [style.width]="progressBarWith[2] + '%'"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </section>
+        <!-- count cards 4 -->
+        <section class="col-12 col-md-5 col-lg-3 col-xl-2 mt-1 count-card count-card-4">
+            <div class="card-icon">
+                <mat-icon>people_alt</mat-icon>
+            </div>
+            <div>
+                <p class="mb-0">Due Books</p>
+                <p class="mb-0">
+                    {{dashBoardCount[3]}}
+                </p>
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" [style.width]="progressBarWith[3] + '%'"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!-- youtube live video upload -->
+    <section class="row">
+        <div class="col-12 col-md-6"></div>
+        <div class="col-12 col-md-6"></div>
+    </section>
+</div>

@@ -28,6 +28,7 @@ const routes: Routes = [
     component: AppShellComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'authors', loadChildren: () => import('./pages/author/author.module').then(m => m.AuthorModule) },
       { path: 'books', loadChildren: () => import('./pages/books/books.module').then(m => m.BooksModule) },
       { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
@@ -40,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/books',
+    redirectTo: '/dashboard',
   },
 ];
 
