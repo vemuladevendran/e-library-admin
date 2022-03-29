@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
@@ -12,16 +13,20 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 export class DashboardComponent implements OnInit {
   dashBoardCount: any[] = [];
   progressBarWith: any[] = [];
-  youtubeForm: FormGroup
+  youtubeForm: FormGroup;
+  youtubeLinkDetails: any;
+  youtubeLink: SafeResourceUrl | string = '';
   constructor(
     private dashboardServe: DashboardService,
     private loader: LoaderService,
     private toast: ToastrService,
     private fb: FormBuilder,
+    private sanitizer: DomSanitizer,
   ) {
     this.youtubeForm = this.fb.group({
       videoTitle: ['', [Validators.required]],
       videoLink: ['', [Validators.required]],
+      preferredYear: ['', [Validators.required]],
     })
   }
 
@@ -47,8 +52,43 @@ export class DashboardComponent implements OnInit {
     this.progressBarWith.push(totalBooks, returnedBooks, issuedBooks, dueBooks);
   }
 
+  // create youtube link
+  async createYoutubeLink(): Promise<void> {
+    try {
+      this.loader.show();
+      if (this.youtubeForm.value.videoLink) {
+        const productPreviewURL = new URL(this.youtubeForm.value.videoLink);
+        this.youtubeForm.value.videoLink = productPreviewURL.searchParams.get('v');
+      }
+      await this.dashboardServe.createYoutubeLive(this.youtubeForm.value);
+      this.toast.success("Uploaded");
+      this.getYoutubeLink();
+    } catch (error) {
+      console.log(error);
+      this.toast.error("Fail to create")
+    } finally {
+      this.loader.hide();
+    }
+  }
+
+  async getYoutubeLink(): Promise<void> {
+    try {
+      this.loader.show();
+      this.youtubeLinkDetails = await this.dashboardServe.getYoutubeLink();
+      console.log(this.youtubeLinkDetails);
+      this.youtubeLink = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.youtubeLinkDetails?.videoLink}`);
+      console.log(this.youtubeLink);
+    } catch (error) {
+      console.log(error);
+      this.toast.error("Fail to get link")
+    } finally {
+      this.loader.hide();
+    }
+  }
+
   ngOnInit(): void {
     this.getDashboardCount();
+    this.getYoutubeLink();
   }
 
 }

@@ -9,12 +9,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 const materialModules = [
   MatInputModule,
   MatFormFieldModule,
   MatIconModule,
   MatCardModule,
-  MatStepperModule
+  MatStepperModule,
+  MatSelectModule
 ]
 
 
