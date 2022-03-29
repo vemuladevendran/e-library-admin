@@ -75,9 +75,7 @@ export class DashboardComponent implements OnInit {
     try {
       this.loader.show();
       this.youtubeLinkDetails = await this.dashboardServe.getYoutubeLink();
-      console.log(this.youtubeLinkDetails);
       this.youtubeLink = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.youtubeLinkDetails?.videoLink}`);
-      console.log(this.youtubeLink);
     } catch (error) {
       console.log(error);
       this.toast.error("Fail to get link")
