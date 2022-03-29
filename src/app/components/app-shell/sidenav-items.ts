@@ -8,4 +8,5 @@ export const menuItems = [
     ['move_up', 'Promote Students', ['/promote-students']],
     ['person', 'Admin', ['/admin']],
     ['sync_lock', 'Passedout Students', ['/passed-out']],
+    ['card_membership', 'Membership Card', ['/membership-price-card']],
 ].map(([icon, text, path]) => ({ icon, text, path }));

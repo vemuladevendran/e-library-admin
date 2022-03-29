@@ -37,6 +37,7 @@ const routes: Routes = [
       { path: 'materials', loadChildren: () => import('./pages/materials/materials.module').then(m => m.MaterialsModule) },
       { path: 'promote-students', loadChildren: () => import('./pages/promote-students/promote-students.module').then(m => m.PromoteStudentsModule) },
       { path: 'passed-out', loadChildren: () => import('./pages/passed-out/passed-out.module').then(m => m.PassedOutModule) },
+      { path: 'membership-price-card', loadChildren: () => import('./pages/membership-price-card/membership-price-card.module').then(m => m.MembershipPriceCardModule) },
     ],
   },
   {
