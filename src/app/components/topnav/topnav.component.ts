@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { TokenService } from 'src/app/services/token/token.service';
 
@@ -15,7 +14,6 @@ export class TopnavComponent implements OnInit {
   timeDate = new Date();
   @Input() userName = '';
   constructor(
-    private auth: AuthService,
   ) {
     setInterval(() => {
       this.timeDate = new Date();
@@ -31,11 +29,9 @@ export class TopnavComponent implements OnInit {
   }
 
   showLoginIcon() {
-    this.isLoggedIn = this.auth.isLoggedIn();
   }
 
   logout() {
-    this.auth.logout();
     console.log('Clicked On Logout');
   }
 
