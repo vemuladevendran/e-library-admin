@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { debounceTime } from 'rxjs';
+import { AuthService } from './services/auth/auth.service';
 import { LoaderService } from './services/loader/loader.service';
 import { TokenService } from './services/token/token.service';
 declare const loadFreshDesk: () => {};

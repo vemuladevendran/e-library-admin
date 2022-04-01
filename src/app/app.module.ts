@@ -8,7 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppShellModule } from './components/app-shell/app-shell.module';
 import { CommonComponentModule } from './components/common-components/common-component.module';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptorService } from './services/auth/auth-interceptor.service';
 import { LoaderService } from './services/loader/loader.service';
+import { AuthService } from './services/auth/auth.service';
 import { TokenService } from './services/token/token.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -37,8 +39,13 @@ import { environment } from '../environments/environment';
       registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
-  providers: [],
-
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
