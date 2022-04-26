@@ -103,9 +103,14 @@
         <div class="col-12 col-lg-6 col-xl-8 mt-3 mt-md-0 border-start border-dark">
             <div *ngIf="youtubeLink">
                 <h3 class="text-uppercase">{{youtubeLinkDetails?.videoTitle}}</h3>
-                <iframe class="w-100" height="350" [src]="youtubeLink" title="YouTube video player"
+                <!-- <iframe class="w-100" height="350" src="https://library243.s3.ap-south-1.amazonaws.com/video/b90ba546170c855cf23ac639f708dce7.mp4" title="YouTube video player"
                     frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
-                    allowfullscreen></iframe>
+                    allowfullscreen></iframe> -->
+                <video width="320" height="240" controls>
+                    <source
+                        src="https://library243.s3.ap-south-1.amazonaws.com/video/b90ba546170c855cf23ac639f708dce7.mp4"
+                        type="video/mp4">
+                </video>
             </div>
             <!-- no video avaliable -->
             <div *ngIf="!youtubeLink" class="text-center fw-bold">

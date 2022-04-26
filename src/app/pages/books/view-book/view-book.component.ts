@@ -27,7 +27,7 @@ export class ViewBookComponent implements OnInit {
       navigator
         .share({
           url: window.location.href,
-          title: `Book Details`,
+          title: 'Book Details' || 'https://elibrary-ui.web.app',
           text: `Title: ${this.details.title}`,
         })
     } catch (error) {
@@ -35,6 +35,7 @@ export class ViewBookComponent implements OnInit {
       this.toast.error("fail to share")
     }
   }
+
 
   async addVisitCount(id: string): Promise<void> {
     try {
